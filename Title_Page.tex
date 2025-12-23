@@ -1,0 +1,109 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --------------------------------------------------------
+% Rho
+% LaTeX Template
+% Version 2.1.1 (01/09/2024)
+%
+% Authors: 
+% Guillermo Jimenez (memo.notess1@gmail.com)
+% Eduardo Gracidas (eduardo.gracidas29@gmail.com)
+% 
+% License:
+% Creative Commons CC BY 4.0
+% --------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,a4paper,twoside]{rho-class/rho}
+\usepackage[english]{babel}
+
+%% Spanish babel recomendation
+% \usepackage[spanish,es-nodecimaldot,es-noindentfirst]{babel}
+
+\setbool{rho-abstract}{true} % Set false to hide the abstract
+\setbool{corres-info}{true} % Set false to hide the corresponding author section
+
+%----------------------------------------------------------
+% TITLE
+%----------------------------------------------------------
+
+%\journalname{Molecular Ecology}
+\title{Genome-Wide Analysis Reveals Altitude-Associated Divergence in a Color-Polymorphic Insect}
+
+%----------------------------------------------------------
+% AUTHORS AND AFFILIATIONS
+%----------------------------------------------------------
+
+\author[1,2]{Ufuk Topalan}
+\author[3]{Arda Cem Kuyucu}
+\author[1]{Salwa Ahmed Farid}
+\author[3,4]{Selim Süalp Çağlar}
+\author[1,$\star$]{İsmail K. Sağlam}
+
+%----------------------------------------------------------
+
+\affil[1]{Department of Molecular Biology and Genetics, Koç University, Istanbul, Türkiye}
+\affil[2]{Ecology and Genetics Research Unit, University of Oulu, Oulu, Finland}
+\affil[3]{Department of Biology, Hacettepe University, Ankara, Türkiye}
+\affil[4]{Hacettepe University Biodiversity Research and Application Center (HUBIOM)}
+\affil[$\star$]{corresponding author}
+
+%----------------------------------------------------------
+% DATES
+%----------------------------------------------------------
+
+\dates{This manuscript was compiled on December 23, 2025}
+
+%----------------------------------------------------------
+% FOOTER INFORMATION
+%----------------------------------------------------------
+
+\leadauthor{Topalan et al. 2025}
+\smalltitle{Altitude-Associated Genomic Divergence}
+
+%----------------------------------------------------------
+% ARTICLE INFORMATION
+%----------------------------------------------------------
+
+\corres{İsmail K. Sağlam}
+\email{iksaglam@ku.edu.tr}
+
+%----------------------------------------------------------
+% ABSTRACT
+%----------------------------------------------------------
+
+\begin{abstract}
+    Environmental gradients provide powerful natural experiments for understanding how selection and gene flow interact to shape genomic and phenotypic variation. However, the genetic basis of adaptation across steep altitudinal clines remains poorly resolved, particularly in systems with high connectivity. We studied the montane bush cricket Isophya rizeensis, which exhibits a discrete male colour polymorphism along a continuous 450–2,300 m elevational transect in the Fırtına Valley (Türkiye), with a sharp transition between dark and pale morphs near mid‐elevations. Using genome-wide RAD sequencing of 71 individuals, we identified over 92,000 SNPs and detected weak overall population structure consistent with substantial connectivity along the gradient. Despite this, putatively adaptive loci showed markedly stronger spatial differentiation than neutral loci. Genome-wide association analyses identified 101 SNPs significantly associated with altitude, exhibiting reciprocal allele-frequency shifts and steep, narrow clines concentrated over short elevational distances. Discriminant analyses further revealed three loci of large effect that strongly differentiate colour morphs and are tightly linked to elevation. Together, these results indicate that spatially varying selection can maintain discrete phenotypic polymorphism and localized genomic divergence despite high connectivity. Our findings provide empirical support for clinal models of local adaptation under gene flow and highlights how environmental heterogeneity structures adaptive genetic variation in montane ecosystems.
+\end{abstract}
+
+%----------------------------------------------------------
+
+\keywords{{Clinal variation, Local adaptation, Spatially varying selection, Genotype--phenotype association, RAD sequencing, Non-model insect, \textit{Isophya rizeensis}}}
+
+%----------------------------------------------------------
+
+\begin{document}
+	
+    \maketitle
+    \thispagestyle{firststyle}
+    % \tableofcontents
+    \linenumbers
+
+%----------------------------------------------------------
+
+\section{Author Contributions}
+IKS conceptualized the study with input from ACK and SSÇ. IKS, ACK, SSÇ and UT conducted field sampling. UT conducted all laboratory work and data analysis with contributions from SAF, IKS and ACK. IKS wrote the manuscript with input from UT. All authors read and approved the final version of the manuscript.
+
+\section{Acknowledgments}
+This work was supported by the The Scientific and Technological Research Council of Türkiye (TÜBİTAK), grant number 122Z038 and Hacettepe University Scientific Research Center Project No. 03 02 601 012. We are greatly thankful to Dr. Michael Ryan Miller and Dr. Sean O'Rourke for conducting RAD library preparation and sequencing at UC Davis.  
+
+\section{Ethics Statement}
+All field collections were done with approval from the General Directorate of Nature Conservation and National Parks of Türkiye under field permits E-21264211-288.04-5057102.
+
+\section{Conflicts of Interest}
+Authors declare no conflict of interest.
+
+\section{Data Availability Statement}
+Raw sequence data are available from NCBI BioProject: PRJNA1228042. Command lines, shell and R scripts for conducting all analyses outlined in the study can be found at https://github.com/UfukTopalan/AdaptiveGenomics\_Isophya.
+
+
+\end{document}

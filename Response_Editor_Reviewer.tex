@@ -1,0 +1,771 @@
+\documentclass[11pt]{rho-class/rho}
+\pagestyle{plain}
+\usepackage{ragged2e}
+\usepackage[none]{hyphenat}
+
+% Rho already loads: geometry, xcolor, setspace, hyperref, amsmath, etc. :contentReference[oaicite:1]{index=1}
+% Only add packages that Rho does NOT load:
+\usepackage[normalem]{ulem}
+
+% override Rho margins (geometry already loaded by the class)
+\geometry{a4paper, margin=2.5cm}
+
+% Your colors (safe: new names, no clash with rhocolor)
+\definecolor{CommentGray}{RGB}{50,50,50}
+\definecolor{ResponseBlue}{RGB}{0,60,150}
+
+% Your macros
+\newcommand{\editorcomment}[1]{%
+  \vspace{0.6em}%
+  \noindent\textcolor{CommentGray}{\textbf{``#1''}}%
+}
+
+\newcommand{\reviewercomment}[1]{%
+  \vspace{0.6em}%
+  \noindent\textcolor{CommentGray}{\textbf{``#1''}}%
+}
+
+\newcommand{\response}[1]{%
+  \par\vspace{0.4em}%
+  \noindent\textcolor{ResponseBlue}{\ignorespaces #1\unskip}%
+  \par\vspace{0.8em}%
+}
+
+% Optional: if you want this to behave like a letter (single column)
+% Rho is set up as twocolumn by default. :contentReference[oaicite:2]{index=2}
+\title{Response to the Editor and Reviewers}
+\author{} % keep empty if you don't want author block
+\date{}   % keep empty if you don't want a date line
+
+\begin{document}
+\RaggedRight
+% Force single-column layout for the whole document (recommended for a response letter)
+\onecolumn
+
+\maketitle
+
+\noindent We thank the Editor and the reviewers for their careful and constructive evaluation of our manuscript. We have revised the manuscript extensively in response to these comments. Below, we address each point in turn. Reviewer and Editor comments are reproduced in bold-black text within quotation marks, followed by our responses in blue. All changes referenced here are highlighted in green in the revised manuscript.
+
+\vspace{1em}
+
+% ============================
+\section*{Editor Comments:}
+% ============================
+
+\editorcomment{%
+I think that one of the main limitations of this study is the fact that a small number of individuals was analyzed per location making population genetics inference difficult. This has implications in filtering data (e.g. Hardy based on Hardy Weinberg equilibria testing) but also for some estimates (e.g. FST; see details below).}
+
+\response{%
+We appreciate the editor’s thoughtful feedback regarding sample size. While the number of individuals per locality is moderate (5–7 males), this corresponds to 10–14 independent chromosome copies, which is the relevant unit for population genomic inferences. In diploid organisms, this represents a reasonable sampling effort for estimating allele frequencies and differentiation parameters, particularly when using likelihood-based approaches. All population genetic analyses were conducted with probabilistic frameworks (ANGSD; PCAngsd) that explicitly model uncertainty and are designed for small to moderate sample sizes and variable sequencing depth. These methods have been shown to yield unbiased estimates of allele frequencies, SFS, and Fst even under such conditions (Willing et al. 2012; Korneliussen et al. 2014). In addition, our empirical inspection of the generated SFSs for each locality confirmed well-formed site-frequency spectra across elevations, indicating that our sampling resolution was sufficient to capture meaningful genetic patterns (Supplementary Figure S1).
+}
+
+\response{%
+Willing, E.-M., Dreyer, C., \& van Oosterhout, C. (2012). Estimates of genetic differentiation measured by FST do not necessarily require large sample sizes when using many SNP markers. PLoS ONE, 7(8), e42649
+}
+
+\response{%
+Korneliussen, T. S., Albrechtsen, A., \& Nielsen, R. (2014). ANGSD: Analysis of Next Generation Sequencing Data. BMC Bioinformatics, 15, 356
+}
+
+\editorcomment{%
+Concerning the methodology, I have some doubts if cline analysis should not be done here (at least it should not be ignored in introduction). It is true that sample size is small and this may result in wide confidence intervals for parameters estimates, but perhaps if not possible or results are messy, perhaps it would be interesting at least to see how frequency changes across geographic distance, altitude or a combination of both along a transect line (see below)}
+
+\response{%
+We thank the editor for this valuable suggestion. Following this recommendation, we performed a full cline analysis to quantify how allele frequencies change along the altitudinal transect. Using the 101 SNPs significantly associated with altitude, we first modeled allele-frequency trends as a function of elevation and then fitted one-dimensional maximum-likelihood cline models in the R package HZAR (Derryberry et al. 2014). These analyses revealed narrow clines (100–200 m) centered at mid- and high-elevations, indicating sharp allele-frequency transitions consistent with strong spatially varying selection. These new methods and results have now been added to the manuscript and are also summarized in Figure 4 and Tables 2, S5–S6. Therefore, we have now explicitly characterized allele-frequency change along altitude, detailing the clinal patterns underlying the observed genetic structure.
+}
+
+\response{%
+Derryberry, E.P., Derryberry, G.E., Maley, J.M. and Brumfield, R.T. (2014), hzar: hybrid zone analysis using an R software package. Mol Ecol Resour, 14: 652-663. https://doi.org/10.1111/1755-0998.12209}
+
+\editorcomment{%
+In terms of the results obtained I am not sure why the results for K=2 were somehow ignored (and deltaK not presented for this K). Results seem meaningful. Also, for K=3, it is not clear to me what represents the third cluster (see more details below). Is this a third genetic entity that differentiated in the centre of the transect? Could not it be an artefact? Anyway, I think results on K=2 deserve more attention in results and discussion.}
+
+\response{%
+We fully agree, and we thank the editor for drawing attention to this issue. In the original submission, $\Delta$K values could not be calculated for K=2 because our NgsAdmix runs began at K=2. Following this suggestion, we re-ran all analyses including K=1–5 and recalculated $\Delta$K following Evanno et al. (2005). With this corrected workflow, $\Delta$K now identifies K=2 as the optimal number of clusters (new Supplementary Figure S3). We have revised the Results to highlight the biological meaning of K=2, which corresponds to a smooth clinal shift in ancestry between low and high elevation individuals. We also agree that the additional component detected at K=3 does not correspond to a discrete genetic unit. In the revised text, we explain that the “third cluster” distributes primarily among mid-elevation individuals but does not form a cohesive population but reflects further subdivision of a continuous gradient. An outcome commonly observed when applying model-based clustering to clinal structures (e.g., Lawson et al. 2018). We have revised the Results section along with Figure 2 and Figure S3 to reflect these changes.
+}
+
+\editorcomment{%
+I also think that the environmental gradient related with altitude is poorly described, as referred by the reviewers. Moreover, the authors focus on colour and on an association between colours and the environment but I am a bit confused because the phenotypes seem discrete and change abruptly between two sampling locations but the environment (although not clear) seems to change gradually. Additionally, is anything known about the evolutionary history of the system. Is the age of divergence known? Does it result from primary divergence or could it reflect a secondary contact?}
+
+\response{%
+We thank the editor for highlighting this point. In the revised manuscript, we explicitly clarify the distinction between the observed discrete phenotypic transition and the continuous environmental gradient. While male colour morphs change abruptly along the transect, the underlying allele frequencies at colour-associated loci exhibit steep but continuous clines with elevation, thereby establishing the link to the environmental gradient. We also now describe the major environmental features that vary predictably with altitude (vegetation structure, shading, and exposure) and discuss how these may mediate selection on colour. These revisions directly address the apparent mismatch between discrete phenotypes and gradual environmental change and clarify the basis of the colour–environment association.}
+
+\response{%
+Regarding evolutionary history, we agree that this is an important consideration. However, detailed divergence‐time estimates are not currently available for \textit{Isophya rizeensis} itself. Available phylogenetic work on the \textit{Isophya amplipennis} species group—of which \textit{I. rizeensis} is a member and its closest relatives (e.g. the \textit{I. speciosa} group) suggests relatively recent divergence on the order of ~0.8–1.2 million years based on mtDNA, accompanied by substantial taxonomic uncertainty and shallow differentiation among neighbouring taxa (Chobanov et al., 2016).}
+
+\response{%
+Consistent with this, within \textit{I. rizeensis} we observe minimal genome-wide structure, very low overall differentiation, and weak variance explained by principal components, arguing strongly against secondary contact between historically diverged lineages. Instead, the data are most consistent with localized, elevation-associated adaptation acting on a small number of loci within a single, weakly structured lineage.}
+
+\response{%
+Nevertheless, substantial uncertainty remains regarding the broader systematic and evolutionary context of the genus. Although \textit{Isophya rizeensis} is currently placed within the \textit{I. amplipennis} species group (Sevgili, 2003), most other \textit{Isophya} species from the northeastern Black Sea region and adjacent valleys (e.g.\ \textit{I. horon}, \textit{I. karadenizensis}, \textit{I. sonora}) are assigned to the \textit{I. zernovi} group (Sevgili, 2018, 2020). This incongruence likely reflects ongoing taxonomic ambiguity and recent, complex diversification within the genus. Taken together, these patterns suggest that the relevant unit of evolutionary history may be the species complex rather than individual nominal species, and they further reduce the likelihood that deep, macroevolutionary processes underlie the patterns observed in \textit{I. rizeensis}, particularly within a single elevational transect where gene flow appears largely continuous. Resolving these broader questions will require integrative phylogenomic and systematic analyses at the species-complex and genus-wide levels, which we view as an important direction for future work.}
+
+\response{%
+Chobanov, D. P., Kaya, S., Grzywacz, B., Warchałowska-Śliwa, E. Çıplak, B. (2016). The Anatolio-Balkan phylogeographic fault: a snapshot from the genus Isophya (Orthoptera, Tettigoniidae). Zoologica Scripta, 46: 165–179.}
+
+\response{%
+Sevgili, H. (2003) A new species of bushcricket (Orthoptera: Tettigoniidae) of the palaearctic genus Isophya (Phaneropterinae) from Turkey. Entomological News, 114, 129–137.}
+
+\response{%
+Sevgili, H. (2018) Bioacoustics and morphology of a new bush-cricket species of the genus Isophya (Orthoptera: Phaneropterinae) from Turkey. Zootaxa, 4514 (4), 451.}
+
+\response{%
+Sevgi̇li̇ H. (2020). Isophya sonora, a new bush-cricket species from Eastern Black Sea region of Turkey (Orthoptera: Tettigoniidae; Phaneropterinae). Zootaxa, 4860 (2), 284–292. https://doi.org/10.11646/zootaxa.4860.2.9
+}
+
+\editorcomment{%
+Finally, it is not clear to me why the authors did not attempt to investigate the function of some of the loci putatively influenced by selection and/or associated with colours, for instance by blasting/aligning them against a reference genome or by trying to annotate them. I think this would be an important addition to the manuscript, as it could allow to relate with possible phenotypes and environment.}
+
+\response{%
+We fully agree with the editor that functional annotation of loci associated with colour or altitude would enhance the biological interpretation of our findings. To this end, we did indeed attempted to annotate the significant RAD loci by aligning them against available insect reference genomes and the NCBI nucleotide database. However, due to the lack of a closely related, well-annotated reference genome and the short length of RAD fragments, alignment success was extremely low, yielding no informative hits. We now clarify this in the Discussion.}
+
+\subsection*{Abstract:}
+
+\editorcomment{%
+please replace “adaptive loci showed elevated divergence, suggesting selection-driven structuring.” by “outlier loci showed stronger differentiation, compatible with selection.}
+
+\response{%
+Following the editors advice we revised this sentence and removed the reference to selection. \textbf{“Despite this, putatively adaptive loci showed markedly stronger spatial differentiation than neutral loci.}}
+
+\editorcomment{%
+please replace “with bidirectional allele frequency shifts consistent with local adaptation.” by “with changes in allele frequencies consistent with local adaptation.}
+
+\response{%
+We appreciate the reviewer’s suggestion to simplify this sentence. However, we prefer to retain the reference to reciprocal allele frequency shifts, as this pattern represents an important result of the study. To improve clarity, we have revised the sentence as below opting to remove the emphasis on adaptation and concentrating more simply on observed patterns:}
+
+\response{%
+\textbf{“Despite low overall genetic differentiation, putatively adaptive loci exhibited stronger divergence than neutral loci, and 101 SNPs were significantly associated with altitude, showing reciprocal allele frequency shifts, with some alleles increasing and others decreasing with elevation”}
+}
+
+\subsection*{Introduction:}
+
+\editorcomment{%
+L17-19. “often reducing gene flow and strengthening divergent selection. This can result in isolation by distance (IBD)}
+
+\response{%
+We agree with the editors suggestion and have revised the section as follows: "Altitudinal gradients are especially informative because they generate sharp environmental transitions over short geographic distances, \textbf{which can reduce gene flow and strengthen divergent selection. The resulting spatial structuring may amplify isolation by distance (IBD), whereby genetic similarity decreases with geographic distance}."
+}
+
+\editorcomment{%
+L41-42. It needs to be explained how color polymorphism can expand niche breadth}
+
+\response{%
+We thank the reviewer for this comment. The cited studies (Forsman 2008; Wennersten \& Forsman 2009; Kozlov et al. 2022) demonstrate that color morphs often differ in performance across habitats, enabling populations to exploit heterogeneous environments. To clarify this causal link, we revised the sentence to specify that distinct color morphs can perform optimally under different conditions, thereby expanding the niche breath of populations. Revised sentence:}
+
+\response{%
+\textbf{“Color polymorphism can also expand niche breadth by allowing different morphs to perform optimally under distinct environmental conditions, thereby enhancing ecological resilience and population persistence”}
+}
+
+\editorcomment{%
+L51. Separate by [,] instead of [:]?
+}
+
+\response{%
+We appreciate the reviewer’s attention to formatting consistency. However, the use of colons in “(Orthoptera: Tettigoniidae: Phaneropterinae: Barbitistini)” follows standard zoological practice for denoting hierarchical taxonomic ranks (Order: Family: Subfamily: Tribe). This style is consistent with standard practice in taxonomic and systematic literature and in databases such as the \href{https://www.catalogueoflife.org/}{\uline{Catalogue of Life}} and \href{https://www.itis.gov/}{\uline{ITIS}}. We therefore retained the colon-based notation. Therefore, we have retained the colon-based notation to maintain conventional formatting.
+}
+
+\editorcomment{%
+L65-67. As mentioned above, it would be good to describe the gradient in terms of vegetation and other environmental relevant features.}
+
+\response{%
+We agree that describing the elevational gradient more explicitly will help readers unfamiliar with the Fırtına Valley. We have therefore expanded this paragraph to specify the main vegetative and environmental features of the valley, clarifying the ecological context for color-dependent performance and local adaptation. Revised version:}
+
+\response{%
+\textbf{“This species is narrowly endemic to the Fırtına Valley and neighboring valleys of the Pontic Mountains, where its distribution is highly fragmented and largely restricted to isolated subalpine habitats above approximately 1{,}600~m. Notably, the Fırtına Valley is the only known location where \textit{I.~rizeensis} occurs continuously from lowland habitats ($\sim$300~m) to elevations exceeding 2{,}300~m, forming a complete elevational transect (Figure~1).}
+}
+\response{%
+\textbf{Along this gradient, vegetation and habitat structure change predictably: densely shaded Colchic broadleaf and boxwood forests dominate lower elevations ($<$900~m), cooler mixed beech--spruce--fir forests occur at mid-elevations, and open, sparsely vegetated subalpine meadows characterize elevations above $\sim$1{,}800~m, where solar exposure is high and thermal conditions are more extreme (\cite{Karacaoglu2014}).”}
+}
+
+\response{%
+Karacaoğlu, Ç., Çağlar, S.S. Digital identification of ecosystem structure in the Fırtına Valley of the Kaçkar Mountains in the Rize City of Turkey. J. Mt. Sci. 11, 421–428 (2014). https://doi.org/10.1007/s11629-013-2755-9
+}
+
+\editorcomment{%
+L79-80. Goal 2. I think this suggest that the authors will somehow present a quantitative analysis of neutral vs. adaptive divergence. Also, even with some selection it is not possible to disentangle the effects of drift. Thus, I would simply suggest “disentangle between neutral vs. adaptive genetic differentiation}
+
+\response{%
+Revised as suggested.
+}
+
+\editorcomment{%
+L92-93. It would be important to clarify how in the discussion.}
+
+\response{%
+We appreciate this comment and agree that the original wording was an overstatement. We have therefore removed this statement. As suggested by the Editor, we now briefly discuss in the Discussion how our results can inform ongoing research on the genomic architecture of local adaptation.}
+
+\subsection*{Material and Methods:}
+
+\editorcomment{%
+L99. Why only males?}
+
+\response{%
+We thank the reviewer for this insightful comment. We focused our genomic analyses on males because colour polymorphism in \textit{Isophya rizeensis} is strongly expressed in males as discrete and easily quantifiable morphs, whereas females show only subtle variation among green shades. Restricting analyses to males therefore allowed us to target the most ecologically and evolutionarily relevant expression of the polymorphism. We now clarify this rationale in the Introduction and briefly discuss the implications for reduced female polymorphism in the Discussion, while noting the importance of including females in future studies.}
+
+\editorcomment{%
+L108-109. Could the authors please explain the basic of the protocol (in the supplementary material), so that readers to not have to go to another manuscript to know the basics. Also, was this a realized or target coverage?}
+
+\response{%
+We thank the reviewer for this constructive suggestion. We have added a concise description of the RAD-seq library preparation protocol to the Supplementary Methods so that readers can follow the key steps without consulting Ali et al. (2016). Regarding sequencing depth, the reported value of 10× refers to the targeted coverage}
+
+\editorcomment{%
+L118-119. I think the authors should make a link to the supplementary material for people to know how was the reference generated}
+
+\response{%
+We thank the reviewer for this comment. All details on the generation of the de novo reference are already provided in the \textbf{Supplementary Information} file under the section \textbf{“De-novo RAD locus discovery and extension.”} To make this clearer for readers, we have added a more explicit cross-reference in the main text, Material and Methods section, directing readers to that section of the Supplementary Information.}
+
+\editorcomment{%
+L134. Is not mapping quality of 10 a bit too low?}
+
+\response{%
+We thank the reviewer for raising this point. The relatively low mapping quality cutoff (\texttt{-minMapQ 10}) was chosen to maximize read retention in RAD-seq data, where restriction-site polymorphism and allelic dropout can otherwise lead to substantial locus loss, particularly when mapping to a de novo RAD reference. This cutoff follows established RAD-seq pipelines such as dDocent (Puritz et al., 2014). To ensure robustness, we subsequently applied stringent site- and genotype-level filters, including posterior genotype probability $\geq$ 0.85, MAF $\geq$ 0.05, minimum site depth of 6$\times$, and retention of loci present in at least 50\% of individuals per population. Together, these filtering steps effectively remove spurious SNPs while retaining high-confidence loci, consistent with current best-practice recommendations for RAD-seq analyses (Andrews et al., 2016; Shafer et al., 2017).}
+
+\response{%
+Andrews, K. R., Good, J. M., Miller, M. R., Luikart, G., \& Hohenlohe, P. A. (2016). Harnessing the power of RADseq for ecological and evolutionary genomics. Nature Reviews Genetics, 17, 81–92.}
+
+\response{%
+Puritz, J. B., Matz, M. V., Toonen, R. J., Weber, J. N., Bolnick, D. I., \& Bird, C. E. (2014). Demystifying the RADseq bioinformatics pipeline: dDocent as an example. Molecular Ecology Resources, 14, 1103–1114.}
+
+\response{%
+Shafer, A. B. A., Peart, C. R., Tusso, S., Maayan, I., Brelsford, A., Wheat, C. W., \& Wolf, J. B. W. (2017). Bioinformatic processing of RAD-seq data dramatically impacts downstream population genetic inference. Molecular Ecology Resources, 17, 128–140.
+}
+
+
+\editorcomment{%
+L140. Was not 50\% a bit too low? Also, did the authors test for Hardy-Weinberg (I can see it mentioned below but I am not sure it was applied for the full dataset)? I know this can be tricky as there is a small number of samples per location…but it would be good to know a bit more about this missing data as there could be some null alleles (and missing data could have a geographic or altitudinal pattern) and how this could influence the main results.}
+
+\response{%
+We thank the reviewer for this thoughtful comment. The 50\% locus presence threshold was chosen as a balance between data retention and bias mitigation in RAD-seq datasets, where missing loci commonly arise from restriction-site polymorphism and allelic dropout. More stringent thresholds (e.g., 80–90\%) can disproportionately exclude variable loci and bias datasets toward conserved regions, whereas lower thresholds increase noise. The 50\% cutoff therefore represents a widely used compromise, particularly for reference-free RAD-seq analyses (Andrews et al., 2016; Huang \& Knowles, 2016; Hemström et al., 2024).}
+
+\response{%
+In addition most analyses were conducted using genotype likelihoods (e.g., ANGSD, PCAngsd, NgsAdmix, pcadapt), which explicitly model uncertainty and are robust to missing data. For analyses requiring called genotypes, we quantified missingness across the full dataset. Mean per-individual missingness ranged from 0.12 to 0.39 across populations and showed no association with elevation (Pearson $r = -0.396$, $p = 0.228$; Supplementary Table S2), indicating no geographic or altitudinal structure consistent with null allele bias. We now report this summary explicitly in the Results.}
+
+\response{%
+Regarding Hardy–Weinberg equilibrium (HWE), loci were not filtered solely based on HWE deviations because several analyses explicitly compare neutral and putatively adaptive variation, and HWE departures can reflect biologically meaningful processes rather than genotyping artefacts. Instead, we excluded loci deviating from HWE due to inbreeding using the \texttt{pcangsd --inbreedSites} option, ensuring that HWE departures in putatively adaptive loci were not due to inbreeding.}
+
+\response{%
+Together, these filtering and analytical choices minimize artefacts from missing data while retaining the diversity of loci necessary to characterize both neutral and adaptive genomic variation.}
+
+\response{%
+Hemström, W., Grummer, J. A., Luikart, G., et al. (2024). Next-generation data filtering in the genomics era. Nature Reviews Genetics, 25, 750–767.}
+
+\response{%
+Huang, H., \& Knowles, L. L. (2016). Unforeseen consequences of excluding missing data from next-generation sequences: simulation study of RAD-seq loci. Systematic Biology, 65, 357–365.}
+
+\response{%
+Shafer, A. B. A., Peart, C. R., Tusso, S., et al. (2017). Bioinformatic processing of RAD-seq data dramatically impacts downstream population genetic inference. Molecular Ecology Resources, 17, 128–140.}
+
+\editorcomment{%
+L152. Why until k=5 and not the total number of locations?}
+
+\response{%
+We thank the reviewer for this question. In this system, sampling locations represent points along a continuous elevational gradient rather than discrete biological populations, and genome-wide Fst values indicate very low differentiation among sites (Supplementary Information, Figure S5). Under such conditions, increasing K to match the number of sampling localities is known to produce statistically overfit and biologically spurious clusters (Pritchard et al., 2000; Lawson et al., 2018). For this reason, we explored values of K=2-5, which corresponds to detecting major axes of genetic structure, rather than forcing the model to partition weak, continuous variation into many artificial groups. We have now clarified this in the Methods.}
+
+\response{%
+Pritchard, J.K., Stephens, M., \& Donnelly, P. (2000). Inference of population structure using multilocus genotype data. Genetics, 155, 945–959.}
+
+\response{%
+Lawson, D.J., van Dorp, L., \& Falush, D. (2018). A tutorial on how not to over-interpret STRUCTURE and ADMIXTURE bar plots. Nature Communications, 9, 3258.}
+
+\editorcomment{%
+L160-161. Ok but these are based on 5/7 inds per population, right? Perhaps the authors to group individuals from some locations with similar genetic ancestry (and geographical and altitudinal similarity) to obtain FSTs based on slightly more meaningful estimates? I am not suggesting necessarily to replace these analyses but rather see if this alternative would give similar results.}
+
+\response{%
+We thank the reviewer for this thoughtful suggestion. Although each locality includes 5–7 sampled males, this corresponds to 10–14 independent chromosome copies, which is the relevant unit for allele-frequency estimation in diploid organisms. Using likelihood-based approaches, such sample sizes are sufficient to obtain unbiased estimates of allele frequencies and Fst (Willing et al., 2012; Korneliussen et al., 2014). Accordingly, we estimated Fst in ANGSD using the joint site-frequency spectrum (realSFS, \texttt{whichFST=1}), which explicitly models allele-frequency uncertainty and is recommended for small to moderate sample sizes. We now clarify this point in the Methods.}
+
+\response{%
+Importantly, the site-frequency spectra for all localities are well formed and highly similar across the elevational gradient (Supplementary Fig.~S1), with no evidence of elevation-dependent distortions that would be expected under systematic allelic dropout or null alleles. This supports treating each sampling locality as a meaningful unit.}
+
+\response{%
+Because genetic differentiation in this system is shallow and continuous along elevation, grouping individuals across sites with similar ancestry would risk imposing artificial population boundaries and inflating Fst estimates (Lawson et al., 2018). For these reasons, we retained sampling localities as the units for Fst estimation.}
+
+\editorcomment{%
+L186-187 (also 207-210). I think that a similar test could be made but using altitudinal differences instead of geographical distance (and or both combined)?}
+
+\response{%
+We thank the reviewer for the suggestion. We clarify that the Mahalanobis distance referenced in lines 186–187 pertains only to the test statistic used by pcadapt to identify outlier loci, and is not used in the isolation-by-distance analyses described in lines 207–210. We have revised the wording in our methods section (Comparing Neutral and Adaptive Genetic Variation) to avoid this possible confusion.}
+
+\response{%
+Regarding the use of elevation differences in place of geographic distance in the Mantel tests: in our sampling design, populations are distributed along a single elevational transect within one valley. As a result, geographic distance and elevation are highly collinear, such that an elevation-difference matrix would not provide an independent spatial predictor. In this context, replacing geographic distance with elevation would be mathematically equivalent to applying a monotonic rescaling of the same distance matrix, and a partial Mantel test would be statistically unstable and difficult to interpret (Guillot \& Rousset, 2013; Legendre \& Fortin, 2010; Meirmans, 2012).}
+
+\response{%
+Our use of geographic distance therefore reflects the standard interpretation of isolation-by-distance, while elevation is examined explicitly in our adaptive divergence analyses (via the identification of altitude-associated SNPs and clinal allele frequency shifts). We have nonetheless revised the methods section to clarify our approach better.}
+
+\response{%
+Pierre Legendre \& Marie‑Josée Fortin (2010). Comparison of the Mantel test and alternative approaches for detecting complex multivariate relationships in the spatial analysis of genetic data. Molecular Ecology Resources, 10(5), 831-844. DOI:10.1111/j.1755-0998.2010.02866.x.}
+
+\response{%
+Gilles Guillot \& François Rousset (2013). Dismantling the Mantel tests. Methods in Ecology and Evolution, 4(4), 336-344. DOI:10.1111/2041-210x.12018.}
+
+\response{%
+P.G. Meirmans (2012). The trouble with isolation by distance. Molecular Ecology, 21(12), 2839-2846. DOI:10.1111/j.1365-294X.2012.05578.x.}
+
+\editorcomment{%
+L194. Yes, but how were these tests implemented? per location? One needs to acknowledge that power is probably low due to the low sample size, no? How many SNPs passed this filter and were eliminated? Should not a similar test have been applied for other estimates (FST, theta…) too? Finally, if this was done it is no clear to me why there are markers where all individuals are heterozygote in a population, as shown in Figure 5. Thus, I think the authors need to explain how was this test really implemented.}
+
+\response{%
+We thank the reviewer for these thoughtful comments. To address the questions raised, we clarify the implementation and purpose of the HWE filtering step and its relationship to the different analyses in the manuscript.}
+
+\response{%
+\textbf{How was the HWE test implemented? Was it done per location?} The HWE test was implemented in PCAngsd, which uses the global genetic covariance among individuals (estimated from genotype likelihoods) to infer individual inbreeding coefficients and then performs a likelihood-ratio test using per-site inbreeding coefficients to determine site-specific HWE deviations. The test is conducted in the global covariance space, rather than separately for each locality, which prevents inflated false positives when sample sizes per site are small (5–7 individuals).}
+
+\response{%
+\textbf{How many SNPs passed this filter and were removed?} As reported in the manuscript, application of the inbreeding-aware HWE filter yielded 82,976 SNPs retained for the pcadapt/PCAngsd selection scan, which were then used to separate the dataset into putatively adaptive and neutral loci. In total, 9,071 SNPs were removed because their HWE deviations were attributable to inbreeding.}
+
+\response{%
+\textbf{Should not a similar test have been applied for other estimates (FST, theta…) too?} HWE-aware filtering was incorporated into the Fst and theta analyses. After identifying loci whose HWE deviations were attributable to inbreeding using PCAngsd, we applied the pcadapt selection scan to partition the dataset into two biologically meaningful SNP sets: 1) Neutral loci: 81,863 SNPs within 8,699 distinct RAD-contigs that do not deviate significantly from HWE; 2) Putatively adaptive loci: 1,113 SNPs within 809 distinct RAD-contigs that significantly deviate from HWE after controlling for inbreeding and structure.}
+
+\response{%
+We then computed FST and theta separately for these two sets, as reported in Section 3.3. Thus, we believe the reviewer’s suggestion has already been implemented.}
+
+\response{%
+\textbf{Why no HWE filtering was applied to Section 3.2 (Population Genetic Structure and Differentiation)}. In the genome-wide PCA and Fst analyses presented in Section 3.2, the aim was to characterize broad patterns of genetic structure and differentiation along the altitudinal transect. For these analyses we deliberately used the full high-quality SNP set because filtering out loci that deviate from HWE can remove biologically meaningful signals (e.g. clinal selection, assortative mating, or migration–selection balance) and thereby bias inference of overall structure (Waples 2015; Meirmans 2020).  In modern RAD-seq datasets with tens of thousands of loci, genome-wide patterns are dominated by neutral variation, such that retaining a small proportion of loci influenced by selection does not distort overall patterns of population structure and instead provides a more biologically realistic representation of genomic variation.}
+
+\response{%
+\textbf{Why do some loci appear as all heterozygotes in one morph in Figure 5?} The loci highlighted in Figure 5 were identified because they discriminate strongly between the two color morphs (Fig. 5B). These same markers also show significant altitude–genotype associations (Table S4) and were classified as putatively adaptive in the pcadapt analysis. As such, they are not expected to behave as neutral loci or to conform to Hardy–Weinberg proportions within each morph. Excess heterozygosity in one morph is fully consistent with loci under divergent selection, balancing selection, or morph-specific selective pressures acting along the altitudinal gradient. Thus, the genotype patterns observed in Figure 5 are expected signatures of their inferred adaptive role rather than evidence of filtering or implementation issues.}
+
+\editorcomment{%
+L201. Is not the number of individuals too low to estimate the SFS?}
+
+\response{%
+We thank the reviewer for this comment. Although each locality includes only 5–7 sampled males, this corresponds to 10–14 independent chromosome copies, which is sufficient for reliable SFS estimation when using likelihood-based methods. Importantly, ANGSD infers the SFS from allele-frequency likelihoods derived from genotype likelihoods, which explicitly model uncertainty and are designed for small sample sizes and moderate sequencing depth (Korneliussen et al., 2014). This avoids biases that can arise from calling genotypes when n is limited.}
+
+\response{%
+To empirically confirm that SFS estimation was not compromised, we examined the folded SFS for every population (now provided as Supplementary Fig. S1). All spectra are well formed, display the full range of allele frequencies, and show highly similar shapes across the elevational gradient. There is no inflation of rare alleles or other distortions suggestive of null alleles, allelic dropout, or insufficient sampling.
+These empirical SFS patterns, together with the likelihood-based estimation framework, indicate that SFS inference in our dataset is robust despite the modest number of individuals per locality.}
+
+\editorcomment{%
+L223-225. Was not this MAF filter applied before, to the whole dataset (L132)? I also do not understand these minimum numbers of genotypes per classes because they would exclude some markers putatively under selection as those shown in Figure 5. Please clarify.}
+
+\response{%
+We thank the reviewer for the opportunity to clarify this point. The reviewer is correct that a minor allele frequency filter (MAF > 0.05) was applied to the whole data set previously. However, in the altitude-association analysis, this parameter is reported again because ANGSD’s score-test framework operates directly on BAM files rather than on a previously filtered VCF/BCF, requiring all filtering criteria to be explicitly specified within the association model. Importantly, this does not imply that the MAF filter was applied twice; rather, the same threshold is reimplemented within the GLM framework. We have revised the Methods to clarify this point and avoid potential confusion.}
+
+\response{%
+The minimum genotype observation filter (\texttt{-minHigh 10}) ensures that each genotype class (AA, Aa, aa) has sufficient posterior support to yield reliable likelihood-based regression coefficients in the GLM score test. This filter does not exclude the loci shown in Figure~5; all markers displayed there meet this criterion and are retained in the altitude-association results (Supplementary Information, Table~S4). While this requirement may exclude some loci with highly unbalanced genotype counts, this is expected and desirable for association testing, as such sites are prone to inflated significance under high uncertainty. In contrast, the \texttt{pcadapt} scan identifies loci deviating from neutral covariance structure and does not require balanced genotype information; therefore, overlap between the two sets is not expected to be complete.}
+
+
+\subsection*{Results:}
+
+\editorcomment{%
+L262. I think it would be important to know more about the distribution of coverage and not just the average. Was there a filter for too high coverage (to avoid duplications or repeats)? I think it would be important to know at least for the outliers if individuals tend to have coverage near the average or are extreme of the distribution when compared with neutral markers.}
+
+\response{%
+We thank the reviewer for raising this point. In our pipeline, extremely high coverage sites were removed by first filtering for PCR duplicates and later by excluding paralogous RAD loci prior to SNP discovery. Together with our SNP calling filters these steps made sure that we were working only with sites that were comparable in depth and quality in all our analysis and depth distribution of individuals for both loci sets were nearly identical (see figure below)}
+
+\begin{figure}[ht]
+\begin{flushleft}
+\begin{minipage}{1\textwidth}
+\includegraphics[width=\linewidth]{Sample_depth.pdf}
+\label{}
+\end{minipage}
+\end{flushleft}
+\end{figure}
+
+\editorcomment{%
+L267-271. And were these the ones used in the downstream analysis? Please specify}
+
+\response{%
+Yes the 92,048 high-confidence SNPs that passed the filters listed in L134–148 ($P < 10^{-12}$, MAF $> 0.05$, depth $\geq 6\times$, present in $\geq 50\%$ of individuals per population) formed the main SNP panel from which all downstream analyses were conducted. Analyses that required additional filtering (e.g., inbreeding-aware HWE filtering for pcadapt, genotype-class requirements for the altitude association test) applied these criteria as analysis-specific refinements to this same starting dataset. Thus, all downstream results derive from this unified SNP panel, with subsequent filtering steps corresponding strictly to the methodological requirements of each analysis.}
+
+\editorcomment{%
+L277-278. It is not clear what the authors mean by transitional zone. Along PC1 samples are continuously distributed. I can see something in Figure B but not in PC1. Also, could this explain what is going on with PC2? It seems that population in near the extremes of altitude are genetically more similar. What can explain this? Did the authors tried to inspect the loci that have higher loadings in PC2 to check if they have similar frequency changes? The variance explained by PC2 is not much lower than by pc1. Thus, it would be important to understand what is going on here.}
+
+\response{%
+We thank the reviewer for this insightful comment. We have revised the PCA paragraph in the Results to clarify this point and removed the term “transitional zone,” which could imply abrupt clustering that is not supported by the data. As the reviewer notes, PC1 reflects a continuous gradient rather than discrete groups; individuals are broadly ordered by elevation, but PC1 and PC2 together explain only 5.9\% of the variance, indicating extremely shallow structure.}
+
+\response{%
+In response to the reviewer’s suggestion, we examined SNP loadings for PC2 to determine whether this axis represents a meaningful biological signal. A Q–Q plot of PC2 loadings shows that they closely follow the distribution expected under random noise, with no enrichment of extreme values (max $|\text{loading}| \approx 0.02$) and no subset of SNPs disproportionately driving the axis. By contrast, PC1 shows mild but consistent deviations from normality in the tails, consistent with a weak genome-wide elevational signal (Supplementary Information Figure S2). These results confirm that PC2 is not biologically interpretable and likely reflects diffuse stochastic or technical sources of variation (e.g., differences in missingness). We have added a concise clarification to the Results section and include both Q–Q plots in the Supplementary Information.}
+
+\editorcomment{%
+L280-289. The third cluster is not mentioned. Could the authors please try to explain to what it corresponds? Is it something biologically meaningful? Is it associated with some trait or environmental variable?}
+
+\response{%
+We thank the reviewer for raising this point. In the revised analysis, which now includes runs from K = 1 to K = 5, the Evanno $\Delta$K method identifies K = 2 as the optimal number of clusters (new Supplementary Figure S3). This two‐cluster solution corresponds to the smooth clinal shift in ancestry between low‐ and high‐elevation individuals shown in Figure 2B.}
+
+\response{%
+As for additional clusters at K=3-5 these represent further partitioning of a continuous gradient into random clusters for model fit and for the most part do not represent biologically meaningful clusters. Model support after delta k=2 falls off drastically so that we do not believe these further clusters merit much evaluation (Supplementary information, Figure S3). These additional components also lack supporting evidence from PCA, FST, or isolation-by-distance analyses, all of which indicate extremely shallow differentiation along the transect.}
+
+\editorcomment{%
+L290-297. I think this could be tested also against altitude difference (or a combination of both). Also was the dataset pruned for LD? There may be some loci that are physically close to each other with high LD. Perhaps only one of these should be kept, so that all points are independent in these tests.}
+
+\response{%
+We thank the reviewer for raising this point. As clarified in an earlier response, elevation and geographic distance are highly collinear in our sampling design because all populations lie along a single linear transect within one valley. An elevation-difference matrix is therefore a monotonic rescaling of the geographic distance matrix, and substituting one for the other would not provide an independent spatial predictor. As shown by Guillot \& Rousset (2013) and Legendre \& Fortin (2010), Mantel tests under such strong collinearity become statistically unstable and difficult to interpret. For this reason, we retain geographic distance as the spatial variable in our IBD analysis, while elevation is examined explicitly in association analysis.}
+
+\response{%
+Regarding LD, the reviewer is correct that this is an important consideration. However, our genome-wide FST estimates are obtained using ANGSD’s realSFS and the whichFST=1 estimator, which infer differentiation from the joint site-frequency spectrum rather than by averaging per-locus FST values. Because the SFS integrates allele-frequency likelihoods across all sites and does not assume SNP independence, LD among neighboring RAD loci does not bias the resulting FST estimates.}
+
+\response{%
+Pierre Legendre \& Marie‑Josée Fortin (2010). Comparison of the Mantel test and alternative approaches for detecting complex multivariate relationships in the spatial analysis of genetic data. Molecular Ecology Resources, 10(5), 831-844. DOI:10.1111/j.1755-0998.2010.02866.x.}
+
+\response{%
+Gilles Guillot \& François Rousset (2013). Dismantling the Mantel tests. Methods in Ecology and Evolution, 4(4), 336-344. DOI:10.1111/2041-210x.12018.}
+
+\editorcomment{%
+L301-302. Were invariable sites included in the nucleotide diversity estimates? Please clarify it in the methods. Could not their absence explain the higher values? If not, perhaps they should be included to have more realistic estimates?}
+
+\response{%
+We thank the reviewer for this important point. In our $\Theta_\Pi$ analyses, invariable sites were indeed included. ANGSD estimates the site frequency spectrum from genotype likelihoods across all bases in each RAD contig, and the $\Theta_\Pi$ calculation in thetaStat uses this SFS as a prior. This framework integrates over both polymorphic and invariant sites preventing upward bias in diversity estimates (Korneliussen et al. 2013). We have now clarified this explicitly in the Methods section.}
+
+\editorcomment{%
+L303-304. I would rather say that neutral genetic diversity was higher for all altitudes but the difference is only significant in some altitudes.}
+
+\response{%
+We thank the reviewer for this helpful clarification. We have revised the text accordingly to match this framing.}
+
+\editorcomment{%
+L309-315. I think it would be interesting to see similar graphs but with altitude differences in the x-axis.}
+
+\response{%
+We thank the editor for this helpful suggestion. As noted in our responses to earlier comments (L186–187 and L290–297), our sampling design follows a single altitudinal transect within one valley, such that elevation and geographic distance are nearly perfectly collinear. For this reason, geographic distance was retained as the spatial variable in the isolation-by-distance analyses, while elevation was examined separately through dedicated altitude-based analyses.}
+
+\response{%
+In the revised manuscript, we have addressed the underlying motivation of this suggestion by explicitly quantifying allele-frequency change along the elevational gradient. Newly added analyses and the revised Figure~4 (see responses to L327–332 and L396–398) evaluate elevation-dependent patterns using two-slope linear models and locus-specific cline analyses (HZAR), which provide formal, quantitative tests of the direction and steepness of allele-frequency change with altitude. These approaches capture the biological information that would be conveyed by plotting altitude differences on the x-axis, while allowing more rigorous inference.}
+
+\editorcomment{%
+L315-318. I do not think signs of fixation in adaptive loci were presented. Are there loci for which the allele frequencies vary between 0 and 1 from the lowest to the highest altitude (or somewhere in the gradient)? These should result in FSt of 1}
+
+\response{%
+We agree with the editor that the phrase “signs of allelic fixation” overstates the results, as although adaptive loci show stronger spatial differentiation than neutral loci, none approach complete fixation. Accordingly, the revised sentence now reads:}
+
+\response{%
+\textbf{“This contrast indicates stronger spatial differentiation at adaptive loci, consistent with selection acting along the altitudinal gradient.”}}
+
+\editorcomment{%
+L326. Please clarify what do you mean by previous analysis (do you mean the outlier loci?)}
+
+\response{%
+We appreciate the editor’s request for clarification. The phrase “prior analysis” refers to the identification of outlier (or putatively adaptive) loci by PCAdapt described in Section 3.3 (“Comparing Neutral and Adaptive Variation”). To avoid ambiguity, we have revised the sentence for clarity:}
+
+\response{%
+\textbf{“This analysis identified 101 SNPs within 75 RAD-contigs significantly associated with altitude (Table~S4), of which 73 contigs were also classified as putatively adaptive by \texttt{Pcadapt}.”}}
+
+\editorcomment{%
+L327-332 (also 396-398). I am not sure I follow this part. First, is not clear to me why in Figure 4 there are MAF values <0 and >0,5. Second, because for each minor allele there is major allele (and vice versa), some should go up and some should go down with altitude, regardless of selection or local adaptation. Thus, I am a bit confused with the message the authors want to convey about divergent selection. It all depends on the end frequency differences. It they are very high, then selection is more probable. Perhaps it would be interesting to see a plot of frequencies for the putatively selected 75 loci across altitude or a cline along the transect to see if the change is gradual or abrupt (and where, does it coincide with some environmental change) and between what values.}
+
+\response{%
+We thank the editor for these helpful comments and agree that the original presentation was unclear. The apparent minor‐allele frequencies $<0$ or $>0.5$ in the original Figure~4 were a visualization artefact caused by smoothed density curves extending beyond the valid range. In addition, the ridge plot did not make it sufficiently clear that we were plotting the frequency of the globally defined minor allele (defined across all sampling sites), rather than both alleles at a locus. We have therefore replaced this figure with a clearer representation.}
+
+\response{%
+To address the editor’s concern that bidirectional allele‐frequency changes are expected regardless of selection, we now explicitly focus on the magnitude and spatial structure of these changes. Using a two‐slope linear model, we show that loci with increasing versus decreasing minor‐allele frequencies exhibit strong, opposing, and highly significant relationships with altitude (Supplementary Information, Table~S5). The revised Figure~4 now displays mean minor‐allele frequencies across elevation for loci grouped by directional trend, making the end‐frequency differences explicit.}
+
+\response{%
+Following the editor’s suggestion, we further characterized allele‐frequency change using one‐dimensional cline models (HZAR). This analysis reveals steep and localized allele‐frequency transitions with large amplitudes across a narrow altitudinal range (Table~2; Supplementary Information, Table~S6), indicating that differentiation is not gradual across the transect but concentrated at specific elevations. Together, these analyses clarify that the observed bidirectional trends reflect strong and spatially structured allele‐frequency shifts, consistent with divergent selection along the altitudinal gradient.}
+
+\response{%
+Derryberry, E.P., Derryberry, G.E., Maley, J.M. and Brumfield, R.T. (2014), hzar: hybrid zone analysis using an R software package. Mol Ecol Resour, 14: 652-663. https://doi.org/10.1111/1755-0998.12209}
+
+\subsection*{Discussion:}
+
+\editorcomment{%
+L365. "subsets of loci putatively under selection" (this is because drift could create a similar effect. Even without selection some loci would show stronger differentiation than others because it is a distribution)}
+
+\editorcomment{%
+L366. “sharp” is a bit subjective}
+
+\response{%
+We thank the editor for these comments. We acknowledge that the phrase “loci under selection” could imply certainty about selection rather than statistical inference. To clarify this, we now refer to these loci as “putatively adaptive”, consistent with the terminology used throughout the manuscript.}
+
+\response{%
+Regarding the term “sharp,” we agree that this could be seen as subjective. We have replaced it with a more quantitative and neutral description to reflect the observed pattern. The revised sentence now reads:}
+
+\response{%
+\textbf{“Our findings show that even in landscapes with low genome-wide differentiation, subsets of putatively adaptive loci can exhibit strong divergence, particularly across steep altitudinal transitions”}}
+
+\editorcomment{%
+L370-374. I think the emphasis is not the most correct here. Does neutral (and adaptive?) genetic diversity increase towards the center? This was not shown as Figure 3A is not very clear to evaluate this. Perhaps it would be better to plot genetic diversity across altitude and test for an increase in the intermediate altitudes. I also think that the authors miss an important point, that outlier loci show lower diversity than the neutral ones may be because selection, which is known to reduce variability. However, this difference is only significant in the intermediate parts of the transect. The question then is, if this is because neutral diversity increases or adaptive diversity decreases towards the center, or both.}
+
+\response{%
+We thank the editor for this careful observation. We agree that our original wording overstated patterns of nucleotide diversity along the gradient. As shown in Figure~3A and Table~S2, genome-wide nucleotide diversity remains largely uniform across elevations for both neutral and putatively adaptive loci. The only consistent difference is a modest but statistically significant reduction in diversity at adaptive loci relative to neutral loci at some mid-elevation sites. We have revised the text accordingly to avoid implying an increase in diversity toward intermediate elevations.}
+
+\response{%
+Regarding interpretation, the reduction in diversity at outlier loci is consistent with expectations under spatially varying selection with ongoing gene flow, where selection locally reduces variability without producing genome-wide shifts in diversity (Hoban et al., 2016; Tigano \& Friesen, 2016). We now frame this pattern explicitly in this context and avoid causal interpretations that are not directly supported by the data.}
+
+\response{%
+To provide appropriate ecological context, we now also refer to PCA and admixture results showing smooth ancestry transitions along the transect and greater homogeneity at elevational extremes. This helps explain the broader connectivity of the system without attributing unsupported trends to nucleotide diversity itself.}
+
+\response{%
+Hoban, S., Kelley, J. L., Lotterhos, K. E., Antolin, M. F., Bradburd, G., Lowry, D. B., Poss, M. L., Reed, L. K., Storfer, A., \& Whitlock, M. C. (2016b). Finding the genomic basis of local adaptation: Pitfalls, practical solutions, and future directions. The American Naturalist, 188(4), 379–397.}
+
+\response{%
+Tigano, A., \& Friesen, V. L. (2016). Genomics of local adaptation with gene flow. Molecular Ecology, 25(10), 2144–2164. https://doi.org/10.1111/mec.13606851}
+
+\editorcomment{%
+L378. But what are the ecological boundaries here?}
+
+\response{%
+We thank the editor for this important question. In our system, we do not infer discrete ecological or physical barriers along the transect. Rather, the observed patterns are consistent with selection acting across narrow elevational transition zones where multiple environmental variables covary and change rapidly over short spatial scales, despite continuous habitat connectivity. This interpretation is supported by the presence of steep, localized allele-frequency clines at putatively adaptive loci and by the absence of strong genome-wide structure. We have clarified this point in the revised Discussion to emphasize that the relevant “boundaries” are environmental transition zones rather than sharp habitat breaks or barriers to dispersal.}
+
+\editorcomment{%
+L392-393. The authors should not say they are tightly linked to altitude-associated loci because this can suggest physical linkage, which is not known. Perhaps “colour polymorphism is associated” is more correct.}
+
+\response{%
+We thank the editor for this useful comment and agree with the suggestion. Our intention was not to suggest physical linkage between loci but rather to suggest that loci contributing to the maintenance of colour polymorphism also play a role in response to altitude. However we acknowledge that the use of “linkage” can be misinterpreted as actual linkage between loci so we have revised accordingly to make this point more clear and less prone to misinterpretation. The revised wording now reads:}
+
+\response{%
+\textbf{“Notably, loci most strongly associated with color morph differentiation also exhibited pronounced allele-frequency shifts along the altitudinal gradient, linking phenotypic divergence to environmental variation correlated with elevation.”}}
+
+\editorcomment{%
+L404–405. “But is not colour discrete and the environmental gradient continuous? Where is the association with the environment? Which environmental features?}
+
+\response{%
+We thank the editor for this important clarification. We now explicitly distinguish between the discrete colour phenotype and the continuous allele-frequency clines underlying this trait. In the revised Discussion, we clarify that although colour morphs are discrete, the loci associated with colour exhibit steep but continuous frequency shifts along elevation, establishing the link to the environmental gradient. We also now specify the environmental features most plausibly associated with this pattern.}
+
+\editorcomment{%
+L406–409. “Be prudent about inferring genetic architecture… Did the authors attempt annotation?}
+
+\response{%
+We appreciate this comment and have revised the text to temper inferences about genetic architecture. We now explicitly state that RAD-seq provides limited genomic coverage and cannot fully resolve the architecture of colour variation. Accordingly, we refer to evidence for loci of relatively large effect while acknowledging that additional small-effect loci are likely involved. We further clarify that attempts at functional annotation were inconclusive due to the absence of a closely related reference genome and the short length of RAD fragments.}
+
+\subsection*{Conclusions:}
+
+\editorcomment{%
+L448-452. The relevance of selection depends on the dispersal distance capacity of the species. This should be mentioned in the discussion.}
+
+\response{%
+We thank the editor for this comment. We have revised the Conclusion to explicitly acknowledge that the effects of spatially variable selection depend on dispersal relative to the scale of environmental change, and we discuss how limited effective dispersal in this system may facilitate the maintenance of adaptive differentiation across elevation.}
+
+\editorcomment{%
+L429-445. I think that other limitations presented above should be mentioned here.}
+
+\response{%
+We thank the editor for this suggestion. We have revised the Limitations and Future Directions section to explicitly incorporate additional limitations discussed earlier in the manuscript, including the correlative nature of genotype–environment and genotype–phenotype analyses, the use of altitude as a composite environmental proxy, and constraints imposed by reduced genomic coverage in a non-model system.}
+
+\subsection*{References:}
+
+\editorcomment{%
+Words in italics are not correctly formatted. Please change.}
+
+\response{%
+Revised accordingly.}
+
+\subsection*{Figure 1 (and tables):}
+
+\editorcomment{%
+Maybe locations could be numbered.}
+
+\response{%
+We thank the editor for this suggestion. In the current version, sampling locations are identified and ordered by altitude, which increases monotonically along the transect and is explicitly labeled in Figure 1 as well as in Table 1 along with coordinates. Because altitude is both biologically meaningful and visually indicated at each sampling site in Figure 1, we felt that additional numeric location identifiers would be redundant.}
+
+\response{%
+However, we have carefully checked that the correspondence between Figure 1 and Table 1 is clear and unambiguous, with each sampling site clearly marked on Figure 1 and uniquely defined by its elevation in text. We believe this presentation maintains clarity while emphasizing altitude as the primary axis of variation in the study.}
+
+\editorcomment{%
+Figure 4. Why are there MAF $\leq$ 0 and $\geq$ 0,5?}
+
+\response{%
+This was a visualization artefact and not a data issue (explained above, see Comment: L327-332). This has now been fixed and all minor allele frequencies are within expected values.}
+
+\editorcomment{%
+Figure 5A. It is not clear where in the graph are two dark individuals that were wrongly classified as pale. Is not the opposite (if the colours represent the phenotype and DAF values are based in phenotypes)? Please clarify. I also think that it would be interesting to see a plot of DAF values with elevation to see at what altitude are the individuals with different colour are.}
+
+\response{%
+We thank the editor for this helpful observation. Figure 5A does not display classification or assignment probabilities. Instead, it shows individual coordinates along the first discriminant function (DF1), which represents a linear combination of multilocus genotype variation that maximally separates colour morphs. These DF1 coordinates quantify genetic similarity to group centroids rather than classification outcomes and therefore do not indicate misclassified individuals. The purpose of this plot is to illustrate how strongly genotype variation along DF1 separates phenotypes (dark vs. pale).}
+
+\response{%
+To clarify this distinction, we have now added a supplementary figure (Figure S6) showing posterior assignment probabilities of each individual to the respective colour morphs along the elevation gradient. The two dark individuals with higher posterior probability of assignment to the pale group are clearly visible in this figure. In addition, we have revised the Results text to explicitly distinguish between separation along DF1 (Figure 5A) and formal assignment probabilities (Figure S6), to avoid potential confusion for the reader.}
+
+\editorcomment{%
+Table 1. I think adding a location name and number would help to establish a connection with Figure 1.}
+
+\response{%
+We thank the editor for this suggestion. As noted above, we use altitude as the primary identifier of sampling locations, which is explicitly labeled both in Figure 1 and in Table 1. Each site is uniquely defined by its elevation and geographic coordinates, and the monotonic increase in altitude along the transect ensures a clear and direct correspondence between the table and the map. We have verified that this linkage is unambiguous and that sites can be readily cross-referenced between Figure 1 and Table 1 without introducing additional location names or numeric identifiers.}
+
+
+\subsection*{Supplementary material}
+
+\editorcomment{%
+Why were individuals from the CAYMY population chosen to identify the Rad loci?}
+
+\response{%
+We thank the editor for raising this point and welcome the opportunity to clarify our choice. Individuals from the CAYMY population were selected for de novo RAD locus discovery because this population yielded the highest number of high-quality RAD contigs during preliminary assessments. In de novo RAD assembly, lower within-population heterozygosity improves the ability to cluster reads into unique loci and reduces fragmentation or artificial splitting of allelic variants into separate contigs. The CAYMY population is geographically isolated and showed comparatively low heterozygosity, which made it particularly suitable for robust locus reconstruction in the absence of a reference genome.}
+
+\response{%
+Finally, we deliberately used individuals from a population outside the focal altitudinal transect to avoid embedding variation specific to the transect into the reference locus set. This approach helps minimize reference bias when subsequently analyzing allele frequency variation and differentiation along the elevational gradient.}
+
+\editorcomment{%
+Also, what do the authors mean by “quality-filtered with a 20\% threshold”?}
+
+\response{%
+We thank the editor for pointing this out. The original phrase “quality-filtered with a 20\% threshold” was an imprecise and potentially misleading shorthand and has been revised for clarity. In practice, reads were filtered using a read-level probability-of-correctness criterion, not a per-base or per-site quality cutoff. For each read, we estimated the probability that the entire 80-bp sequence was correct by converting Phred quality scores to base-level correctness probabilities and multiplying these probabilities across all bases in the read. Reads were retained only if the resulting cumulative probability of correctness was $\geq$ 0.80.}
+
+\response{%
+The previously used “20\% threshold” referred implicitly to the complementary probability and was not intended to describe an error-rate parameter; we agree that this wording was unclear. We have now revised this section to explicitly describe the read-level probability-based filtering procedure and to remove the ambiguous phrasing. We now state:}
+
+\response{%
+\textbf{“In brief, 88 bp forward reads were trimmed to 80 bp from the 3' end, quality filtered using a read-level probability threshold of $\geq$ 0.80\ estimated accuracy, and concatenated into a single FASTA file.”}}
+
+\editorcomment{%
+Table S3. Please explain all the column headers’ abbreviations.}
+
+\response{%
+All abbreviations are now explained in full below the table as footnotes.}
+
+\editorcomment{%
+Why is the deltaK for 2 not shown?}
+
+\response{%
+DeltaK=2 was initially not shown because we had not calculated proportions for K=1. However, we now revised the admixture analysis to include K=1 and report DeltaK=2 (Figure S3).}
+
+\editorcomment{%
+Figure S3. Please clarify if this a genome-wide average.}
+
+\response{%
+Yes, the Figure S3 -now Figure S5-, shows the global weighted Fst values (i.e. genome-wide weighted averages). We have revised the figure legend  to clarify this.}
+
+\section*{Referee \#1:}
+
+\editorcomment{%
+1. Role of Females: The study focuses primarily on male individuals and their color polymorphism, but there is limited discussion regarding the role of females in adaptation to altitude. Do females exhibit any coloration? How might they contribute to the transmission of adaptive variation, particularly regarding color polymorphism? Including females in the study could provide valuable insights into other potential adaptive traits beyond color. Additionally, since color is associated with male individuals, it would be beneficial to explore whether sexual selection mechanisms could play a role in the observed adaptation.}
+
+\response{%
+We thank the reviewer for this thoughtful point. Females of Isophya rizeensis do exhibit coloration, but variation is much more subtle and primarily in differing shades of green compared to the discrete black–green polymorphism observed in males (Sevgili, 2003; Sağlam & Çağlar, 2007). Because the primary aim of this study was to investigate the genomic basis and maintenance of a clearly expressed, spatially structured colour polymorphism along an altitudinal gradient, we focused our analyses on males, in which colour morphs are discrete and ecologically well characterised.}
+
+\response{%
+We have now clarified this rationale in the Introduction and expanded the Discussion to address how sex-specific differences in behaviour and microhabitat use may lead to differential exposure to environmental and predation pressures, potentially explaining reduced colour polymorphism in females. We further emphasize that incorporating females in future genomic analyses would be valuable for testing whether altitude-associated genetic effects are shared across sexes and for disentangling the relative contributions of natural and sexual selection.}
+
+\editorcomment{%
+2. Sampling Design and Replicability: The study is based on data from a single transect, which limits generalizations. It would significantly strengthen the findings if the authors could replicate the study in other transects and demonstrate that the observed patterns and variants associated with altitude and color are consistent across different locations. I recommend the authors address this limitation in their discussion and consider the implications for the robustness of their conclusions.}
+
+\response{%
+We thank the reviewer for highlighting the importance of replication across multiple transects. As the reviewer notes, our study relies on a single altitudinal transect, and we now make this limitation explicit in the revised Limitations and Future Directions section.}
+
+\response{%
+In \textit{I. rizeensis}, opportunities for replication are inherently constrained by the species’ biogeography: the Fırtına Valley is the only location where the species occurs continuously from lowland habitats to subalpine elevations. Across the remainder of its range the species is fragmented and restricted to isolated high-elevation patches, providing no additional continuous altitudinal gradients that would allow comparable sampling. This pattern reflects true distributional limits rather than incomplete sampling, as documented by previous regional surveys and distributional work.}
+
+\response{%
+We have revised both the Introduction and the Limitations section to clarify this point and to emphasize that, although the Fırtına Valley transect represents a unique natural setting for studying altitudinal genomic and phenotypic divergence in this lineage, comparative studies in closely related \textit{Isophya} species or other montane orthopterans will be valuable for evaluating the generality of the genotype–environment associations identified here.}
+
+\editorcomment{%
+3. Transition Zone between Phenotypes: The paper could benefit from a more detailed description of the transition zone between phenotypes. Is the shift between the two phenotypes (dark vs. pale) discrete, or do populations exhibit a mixture of both? If the transition is discrete, is there any clear ecological or habitat change at the transition point that could explain the abrupt phenotypic change? A deeper discussion of this could help contextualize the phenotypic differences in terms of the environment.}
+
+\response{%
+We thank the reviewer for this thoughtful comment. We now clarify in the Introduction that the shift between dark and pale male morphs is discrete rather than gradual. Across all surveyed localities, populations were monomorphic for either the dark or pale phenotype, and we did not observe mixed-phenotype populations at intermediate elevations. The transition occurs near $\sim$ 1,100 m and coincides with a change from densely vegetated mid-elevation forests to more open subalpine habitats. We have incorporated this clarification into the revised Introduction, where we now describe both the discreteness of the morph transition and its alignment with environmental differences along the transect.}
+
+\editorcomment{%
+Line 17: IBD is not really a consequence of an altitudinal gradient but rather the gradient imposes a fast change on conditions that might promote differentiation on top of IBD.}
+
+\response{%
+We thank the reviewer for these helpful suggestions. We have revised the text to clarify that altitudinal gradients do not directly cause IBD but can amplify its effects by structuring populations over space while simultaneously reducing gene flow and strengthening divergent selection.}
+
+\editorcomment{%
+Line 21: The term "habitat structure" seems a bit vague in this context. While environmental conditions likely contribute to selective pressures, "habitat structure" may be too broad. It might be more precise to refer to specific ecological factors, such as vegetation type.}
+
+\response{%
+We thank the reviewer for this suggestion. We have replaced the broader term "habitat structure" with the more specific phrase "shifts in vegetation structure" to more precisely reflect the ecological factors relevant to this system.}
+
+\editorcomment{%
+Line 54: What about females? What color do they exhibit?}
+
+\response{%
+We thank the reviewer for this question. We have now clarified in the Introduction that females also exhibit dorsal coloration but only in subtle green tones and do not exhibit the discrete black–green polymorphism observed in males, which is why only males were used in this study.}
+
+\editorcomment{%
+Line 61: How do females fit in this thermoregulation hypothesis since they do not exhibit the polymorphism?}
+
+\response{%
+We thank the reviewer for raising this question. We have now added to the discussion how sex-specific differences in ecological exposure and signalling behaviour can lead to stronger or more finely tuned colour divergence in the more exposed sex, offering a plausible explanation for why males, but not females, show pronounced altitudinal polymorphism. We also note that future analyses incorporating females will be needed to determine whether altitude-associated genetic effects are shared across sexes.}
+
+\editorcomment{%
+Line 109: How was the depth estimated? Were the number of loci estimated upfront? If so, how? Maybe also add information about the number of expected reads per sample.}
+
+\response{%
+We thank the editor for this request for clarification. Because \textit{I.~rizeensis} is a non-model organism lacking a reference genome or a genome close enough to use, the expected number of RAD contigs and sequencing depth could not be estimated a priori. Instead, depth and locus recovery were assessed empirically.}
+
+\response{%
+Prior to the main sequencing effort, we conducted a small pilot RAD-seq run on 2–3 individuals using the SfbI enzyme and a partial Illumina lane, which yielded approximately 20{,}000 RAD contigs at an average depth of $\sim$8$\times$. Based on this pilot, we selected a higher-frequency cutter (PstI) for the full dataset and targeted an intended mean depth of approximately 8–10$\times$ per individual using one full Illumina lane.}
+
+\response{%
+In the final dataset, mean per-individual depth was approximately 6-7$\times$, lower than expected. All downstream analyses were restricted to loci with a minimum mean per-individual depth of $\geq$6$\times$, and individuals with fewer than 1{,}000{,}000 aligned reads were excluded. Thus, all retained data met conservative coverage thresholds, ensuring that inference was not driven by low-coverage loci or individuals.}
+
+\editorcomment{%
+Line 154: How was the Evanno method implemented?}
+
+\response{%
+We implemented Evanno’s method using a custom R script which will be available through following links in our Data Availability Statement.}
+
+\editorcomment{%
+Line 197: How was this threshold calculated?}
+
+\response{%
+Thank you for this comment. The genome-wide significance threshold was obtained by applying Benjamini--Hochberg false discovery rate (FDR) control at $\alpha = 0.05$ across 82{,}976 SNPs. This yields an adjusted per-test significance level of $0.05 / 82{,}976 = 6.03 \times 10^{-7}$. We then obtained the corresponding $\chi^2$ critical value for 1 degree of freedom, which is $\chi^2 = 24.903$. SNPs exceeding this value were therefore considered outliers.}
+
+\editorcomment{%
+Line 373: Ok, but what is the cause?}
+
+\response{%
+We thank the reviewer for raising this point. We have clarified the text to avoid implying that genetic diversity increases toward intermediate elevations. As shown in Figure 3A and detailed in Table S2, genome-wide nucleotide diversity is largely uniform across the transect. The slight reduction at adaptive loci in mid-elevation populations is expected under spatially varying selection with gene flow. The revised Discussion now reflects this corrected interpretation.}
+
+\editorcomment{%
+Lines 394 to 397: The authors suggest a link between altitude-associated loci and color polymorphism, but how can they be certain that these loci are directly involved with color? Given that color may be one of many traits influenced by altitude, it is important to consider whether these loci could be linked to other unmeasured traits. Additional discussion on this would be valuable.}
+
+\response{%
+We appreciate the reviewer noting this aspect, which benefits from clarification. To address this we now note more clearly that because the colour-associated loci also show strong correlations with altitude, the observed patterns could reflect selection on other altitude-linked traits rather than pigmentation itself, and that without functional annotation we cannot distinguish direct effects on colour from pleiotropy or tight linkage.}
+
+\editorcomment{%
+Line 411-412: Just out of curiosity, did the authors check if these loci correspond to coding regions?}
+
+\response{%
+As suggested we did indeed attempt to annotate these loci against available orthopteran genomes and the broader insect databases (including the InsectBase resource), but the short length of RAD‐seq contigs and the absence of a closely related, well-annotated reference genome prevented reliable functional assignment. We now state this explicitly in the manuscript.}
+
+\editorcomment{%
+Line 414: The fact that dark individuals are mostly heterozygote and pale homozygote make me wonder about the mechanisms of inheritance. Is there any information about the dominance of any of these traits?}
+
+\response{%
+Thank you for this question. In \textit{I. rizeensis}, our data show that heterozygous individuals at the colour-associated loci are almost always dark, whereas pale individuals are typically homozygous. This pattern is compatible with dominance of the dark phenotype, but our data cannot establish a formal inheritance mode. In Orthoptera more broadly, simple genetic architectures and dominance of green/pale colouration over brown/dark colouration have been documented in several species (Schielzeth, H., \& Dieker, P., 2020; Winter et al., 2021), but without breeding or segregation analyses we cannot infer the mechanism in I. rizeensis. We therefore refrain from interpreting the heterozygote pattern as evidence for a specific dominance model.}
+
+\response{%
+Schielzeth, H., \& Dieker, P. (2020). The green–brown polymorphism of the club-legged grasshopper Gomphocerus sibiricus is heritable and appears genetically simple. BMC Evolutionary Biology, 20, 63. https://doi.org/10.1186/s12862-020-01630-7}
+
+\response{%
+Winter, G., Varma, M., \& Schielzeth, H. (2021). Simple inheritance of colour and pattern polymorphism in the steppe grasshopper Chorthippus dorsatus. Heredity, 127, 66–78. https://doi.org/10.1038/s41437-021-00433-w}
+
+\editorcomment{%
+Line 426 to 427: The authors could develop this idea a bit more. What are their hypotheses of how genotype-phenotype-environment interact?}
+
+\response{%
+We appreciate this thoughtful question. We have opted not to expand this section further because, given the limited genomic representation of RAD-seq and the absence of functional annotation, any detailed hypothesis about the mechanistic interaction between genotype, phenotype, and environment would be speculative. However, we have revised the text especially in the discussion to now more clearly state that (i) colour-associated loci show sharp genotype–phenotype and genotype–environment shifts, (ii) these patterns are consistent with environmentally mediated divergence, and (iii) without functional data we cannot distinguish direct effects on pigmentation from pleiotropy or linkage via altitude associated environmental factors. We believe this framing accurately reflects what our results do and do not allow us to infer, without over-interpreting the data.}
+
+\section*{Referee \#2}
+
+\editorcomment{%
+First, it is not instantly clear that the populations are monomorphic for a given colour morph. This result is suprising given the authors detect that all black morphs are heterozygous for the colour loci. One should expect to observe some rare green morphs at low elevation from mating (33\% every generation, the black homozygotes possibly being lethal?). These might be counter selected very early in development by a strong selection (bird predation would certainly be a strong selective pressure that keeps green morphs at very low frequency every year at low altitude). The sample design ($\sim$ 6.45 insects collected on average) may also preent them to detect rare morphs. I feel that the authors should discuss these aspects in the discussion.}
+
+\response{%
+We appreciate this insightful comment. As the reviewer notes, our finding that dark individuals are heterozygous at the colour-associated loci does imply that some pale individuals might be expected at low elevations. Although our RAD-seq dataset comprises 5–7 sequenced individuals per site, field surveys conducted over many years (2001–2014) involved the collection or observation of hundreds of individuals per locality, and mixed-phenotype populations have not been documented. Thus, populations along the transect appear effectively monomorphic for the locally predominant morph. While this pattern is consistent with strong selective forces maintaining the geographic structure of the polymorphism, direct evidence for the underlying mechanism is not yet available. We now clarify this long-term empirical pattern in the Introduction and more explicitly discuss potential selective explanations for both phenotypic and genomic patterns in the revised Discussion.}
+
+\editorcomment{%
+Second, the authors advance the theory of thermal selection as a primary cause for their results (at least they speak of it first), but it seems rather unlikely from the onset given that black individuals are present at lower elevation with hotter temperatures. The authors also acknowledge a change of vegetation type with altitude, and little evidence for differential thermal tolerance of the green and black morphs in past work. All this points rather strongly, at least in the way they expose the system, for a difference in crypsis (with bird predation being a strong driver of differential selection along the vegetation gradient). I feel the authors could have given more depth to their current study by doing relatively simple analysis of colouration of the host plants and the insects (using digital photography). Whithout the ecological setting, the paper lacks depth and I feel I did not learn anything new (3 ddRAD loci are associated with colouration, but we don’t know what potential genes).}
+
+\response{%
+We thank the reviewer for these thoughtful observations. In the revised Discussion, we now present thermal stress and crypsis as alternative, non-exclusive hypotheses and make explicit that the current data do not allow us to distinguish among ecological mechanisms. We also emphasise that the presence of dark individuals at low elevations argues against classical thermal melanism and discuss more directly how vegetation structure, crypsis, shading, and visually hunting predators may contribute to altitude-associated divergence.}
+
+\response{%
+We agree that a fuller ecological assessment, including quantitative measurements of background reflectance, vegetation structure, and microhabitat conditions, would provide valuable insight into the selective environment. Such analyses are planned for future work but remain outside the scope of the present study, which focuses on genomic and phenotypic patterns along the transect. To avoid over-interpretation, we restrict our conclusions to the patterns supported by our data: the sharp allele-frequency transitions at a small number of loci, their tight association with colour morphs, and their parallel covariation with elevation.}
+
+\response{%
+Finally, although we cannot yet identify the underlying genes due to the limited genomic representation of RAD-seq and the absence of a closely related annotated genome, we show that strong and spatially coherent genotype–phenotype–environment associations emerge even under these constraints. We now frame these results more cautiously as identifying candidate genomic regions for future functional and ecological work rather than resolving the full genetic basis of colour.}
+
+\editorcomment{%
+Third, the authors use geographical distance to perform the equivalent of cline analyses (Fig. 3B). Why not use elevation, or even better climatic variables or vegetation type on the axis to really test for and effect of elevation or underlying variables ?}
+
+\response{%
+We thank the reviewer for this helpful suggestion. In the revised manuscript, we now model allele-frequency and phenotype transitions explicitly as clines along the altitudinal gradient. These cline analyses allow us to estimate the centre and width of both genomic and phenotypic transitions with respect to elevation, directly addressing the role of altitude. The new results are presented in Figure 4 and Table 2 and are described in detail in the Results and in the fully updated Methods section, where the analysis workflow is now clearly documented.}
+
+\editorcomment{%
+On a more minor point, I don’t understand figure 4. The authors should possibly represent the clines at the selected loci agains the cline at (a subset of) neutral loci instead? The figure seems to be a bad representation of the actual data with some overfitting of the density function, ending up with negative values of MAF.}
+
+\response{%
+We thank the reviewer for highlighting this issue. The original Figure 4 indeed suffered from a visualization artefact caused by the density-based ridge plot, which produced minor-allele frequency curves extending slightly outside the valid 0–0.5 range and obscured the underlying patterns. As also noted by the editor, this could be misinterpreted as overfitting or as plotting both major and minor alleles simultaneously. We have replaced Figure 4 with a clearer representation that shows mean minor-allele frequencies per altitude for loci grouped by directional trend (increasing vs. decreasing), together with fitted clines and confidence intervals. This revised figure avoids the artefact entirely and more accurately conveys the altitudinal patterns in allele-frequency change.}
+
+\editorcomment{%
+Finally, I think the author should include the dominant colour morph information in figure 5C. It would make it more readable, than to have to look up at the information of when the transition of colour occur in other figures or in table 1.}
+
+\response{%
+We thank the reviewer for this helpful suggestion. We have revised Figure 5C to explicitly include the dominant colour morph at each sampling location.}
+
+\editorcomment{%
+I did not see a data and script availability statement. Authors should make data and scripts available to the community to improve the reproducibility of science.}
+
+\response{%
+We thank the reviewer for raising this point. A full Data Availability Statement is included in the manuscript; however, in accordance with the journal’s double-blind review policy, accessions and repository links that would reveal author identity have been temporarily withheld from the review version. These include the NCBI BioProject accession for raw sequencing data and a public GitHub repository containing all analysis scripts. This information is available to the editor and will be fully disclosed upon acceptance to ensure transparency and reproducibility.}
+
+\end{document}
